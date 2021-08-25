@@ -1,5 +1,4 @@
 ﻿using FA.JustBlogAPI.Services;
-using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -14,14 +13,14 @@ namespace FA.JustBlogAPI.WebAPI.Controllers
             _categoryServices = categoryServices;
         }
 
-        public async Task<IHttpActionResult> GetById(Guid id)
+        public async Task<IHttpActionResult> GetAllCategory()
         {
-            var category = await _categoryServices.GetByIdAsync(id);
-            if (category == null)
+            var categories = await _categoryServices.GetAllAsync();
+            if (categories == null)
             {
                 return NotFound();
             }
-            return Ok(category);
+            return Ok(categories);
         }
     }
 }

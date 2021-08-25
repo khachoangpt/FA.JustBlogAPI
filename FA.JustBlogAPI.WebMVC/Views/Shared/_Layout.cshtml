@@ -25,7 +25,7 @@
                 <li class="nav-item active">
                     @Html.ActionLink("Home", "Index", "Post", null, new { @class = "nav-link" })
                 </li>
-                @*@{ Html.RenderAction("Index", "Category");}*@
+                @{ Html.RenderAction("Index", "Category");}
                 <li class="nav-item active">
                     @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
                 </li>
@@ -50,7 +50,7 @@
                     </li>
                 }
             </ul>
-            @*@Html.Partial("_LoginPartial")*@
+            @Html.Partial("_LoginPartial")
         </div>
     </nav>
 
@@ -77,7 +77,7 @@
                 <hr />
                 @{ Html.RenderAction("MostViewedPost", "Post");}
                 <hr />
-                @*@{ Html.RenderAction("PopularTags", "Tag");}*@
+                @{ Html.RenderAction("PopularTags", "Tag");}
             </div>
         </div>
     </div>

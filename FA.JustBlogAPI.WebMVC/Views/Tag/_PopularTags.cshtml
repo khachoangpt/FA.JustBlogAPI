@@ -1,0 +1,7 @@
+﻿<aside class="single_sidebar_widget popular_post_widget">
+    <h3 class="widget_title">Tag</h3>
+    @foreach (var item in Model)
+    {
+        <a class="text-decoration-none mr-2 h5" href="@Url.Action("GetPostByTag", "Post", new { tag = item.Name })"><div class=" badge badge-primary mb-2">@item.Name</div></a>
+    }
+</aside>

@@ -1,12 +1,15 @@
-﻿using FA.JustBlogAPI.Models.BaseEntities;
+﻿using FA.JustBlog.Data;
+using FA.JustBlogAPI.Models.BaseEntities;
 using FA.JustBlogAPI.Models.Common;
+using FA.JustBlogAPI.Models.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace FA.JustBlogAPI.Data
 {
-    public class JustBlogContext : DbContext
+    public class JustBlogContext : IdentityDbContext<User>
     {
         public JustBlogContext() : base("JustBlogConn")
         {
@@ -59,7 +62,7 @@ namespace FA.JustBlogAPI.Data
 
         private void BeforeSaveChanges()
         {
-            var entities = this.ChangeTracker.Entries();
+            var entities = ChangeTracker.Entries();
             foreach (var entry in entities)
             {
                 if (entry.Entity is IBaseEntity entityBase)

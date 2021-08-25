@@ -90,9 +90,8 @@
                     return;
                 }
 
-                $.ajax({
+                $.post({
                     url: '/Comment/AddComment',
-                    type: 'post',
                     data: {
                         postId: postId,
                         name: name,
