@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewBag.Title = "Posts";
+}
+
+@foreach (var item in Model)
+{
+    <div class="item">
+        <div class="post_s_item">
+            <div class="post_img">
+                <img class="img-fluid" src="~/assets/images/@item.ImageUrl" alt="@item.ImageUrl">
+            </div>
+            <div class="post_text">
+                <a class="cat" href="@Url.Action("GetPostByCategory", "Post", new { category = item.Category.Name})">@item.Category.Name</a>
+                <br />
+                @Html.ActionLink(item.Title, "Detail", "Post",
+               new { @year = item.PostedOn.Year, month = item.PostedOn.Month.ToString("00"), urlSlug = item.UrlSlug },
+               new { @class = "h3 text-decoration-none" })
+                <br />
+                <i class="text-muted">@item.ShortDescription</i>
+                <div class="date text-secondary">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>  Posted
+                    <time class="timeago" datetime="@item.PostedOn"></time>
+                    with rate @item.Rate by @item.ViewCount @(item.ViewCount <= 1 ? "view" : "views")
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4" />
+}

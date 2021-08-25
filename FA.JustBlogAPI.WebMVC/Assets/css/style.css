@@ -1,0 +1,51 @@
+﻿.nav-side-menu {
+    overflow: auto;
+    font-family: verdana;
+    font-size: 12px;
+    font-weight: 200;
+    background-color: #2e353d;
+    position: fixed;
+    top: 0px;
+    width: 300px;
+    color: #e1ffff;
+}
+
+    .nav-side-menu .brand {
+        line-height: 50px;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .nav-side-menu .toggle-btn {
+        display: none;
+    }
+
+@media (max-width: 989px) {
+    .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+        height: auto;
+    }
+
+        .nav-side-menu .toggle-btn {
+            display: block;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 10 !important;
+            padding: 3px;
+            background-color: #ffffff;
+            color: #000;
+            width: 40px;
+            text-align: center;
+        }
+}
+
+@media (min-width: 989px) {
+    .nav-side-menu .menu-list .menu-content {
+        display: block;
+    }
+}

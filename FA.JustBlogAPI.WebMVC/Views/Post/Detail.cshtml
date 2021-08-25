@@ -1,0 +1,132 @@
+﻿@model Post
+@{
+    ViewBag.Title = "Detail Page";
+}
+
+<div class="item">
+    <div class="post_s_item">
+        <div class="post_img">
+            <img class="img-fluid" src="~/assets/images/@Model.ImageUrl" alt="@Model.ImageUrl">
+        </div>
+        <div class="post_text">
+            <a class="cat" href="@Url.Action("GetPostByCategory", "Post", new { category = Model.Category.Name})">@Model.Category.Name</a>
+            <h2 class="text-primary">@Model.Title</h2>
+            <p>
+                @Html.Raw(@Model.PostContent)
+            </p>
+            <div class="date">
+                <a class="text-primary text-decoration-none">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> Posted
+                    <time class="timeago" datetime="@Model.PostedOn"></time>
+                    with rate @Model.Rate by @Model.ViewCount view(s)
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="my-4" />
+
+<div class="comment-form mb-5">
+    <h4>Leave a comment</h4>
+    <form>
+        @Html.HiddenFor(x => x.Id, new { id = "post-id" })
+        <div class="form-group form-inline">
+            <div class="form-group col-4">
+                <input type="text" class="form-control border border-primary" id="name" name="name" placeholder="Enter name" onfocus="this.placeholder = ''">
+            </div>
+            <div class="form-group col-7">
+                <input type="email" class="form-control border border-primary" id="email" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''">
+            </div>
+        </div>
+        <div class="form-group col-12">
+            <input type="text" class="form-control border border-primary" id="commentHeader" name="commentHeader" placeholder="Enter comment header" onfocus="this.placeholder = ''">
+        </div>
+        <div class="form-group col-12">
+            <textarea class="form-control mb-10 border border-primary" rows="3" id="commentText" name="commentText" placeholder="Enter comment" onfocus="this.placeholder = ''"></textarea>
+        </div>
+        <div class="col-12">
+            <button type="button" id="submit-comment" class="btn btn-success">Comment</button>
+        </div>
+    </form>
+</div>
+
+<div class="comments-area">
+    <h4 id="count-comment">@Model.Comments.Count @(Model.Comments.Count <= 1 ? "Comment" : "Comments")</h4>
+    <div class="comment-list">
+        @foreach (var item in Model.Comments.OrderByDescending(c => c.CommentTime).ToList())
+        {
+            <div class="single-comment justify-content-between d-flex mb-2">
+                <div class="user justify-content-between">
+                    <div class="thumb d-flex">
+                        <img class="rounded-circle mr-2" src="~/Assets/images/avatar01.png" alt="avatar">
+                        <div><a class="h4" href="#">@item.Name</a><i> - @item.CommentTime.ToString("dddd, dd MMMM yyyy")</i></div>
+                    </div>
+                    <div>
+                        <p class="date h6">@item.CommentHeader</p>
+                        <p class="comment">@item.CommentText</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#submit-comment").click(() => {
+                let postId = $("#post-id").val();
+                let name = $('#name').val().trim();
+                let email = $('#email').val().trim();
+                let commentHeader = $('#commentHeader').val().trim();
+                let commentText = $('#commentText').val().trim();
+
+                if (name.length == 0 ||
+                    email.length == 0 ||
+                    commentHeader.length == 0 ||
+                    commentText.length == 0) {
+                    alert("Please input all fills.");
+                    return;
+                }
+
+                $.ajax({
+                    url: '/Comment/AddComment',
+                    type: 'post',
+                    data: {
+                        postId: postId,
+                        name: name,
+                        email: email,
+                        commentHeader: commentHeader,
+                        commentText: commentText
+                    },
+                    success: data => {
+                        let commentCount = parseInt($("#count-comment").text()) + 1;
+                        if (commentCount <= 1) {
+                            $("#count-comment").text(commentCount + " Comment");
+                        } else {
+                            $("#count-comment").text(commentCount + " Comments");
+                        }
+                        var timeFormat = new Date(parseInt(data.CommentTime.substr(6)));
+                        timeFormat = timeFormat.format("dddd, dd mmmm yyyy");
+
+                        $(".comment-list").prepend(`
+                                <div class="single-comment justify-content-between d-flex mb-2">
+                                    <div class="user justify-content-between">
+                                        <div class="thumb d-flex">
+                                            <img class="rounded-circle mr-2" src="/Assets/images/avatar01.png" alt="avatar">
+                                            <div><a class="h4" href="#">${data.Name}</a><i> - ${timeFormat}</i></div>
+                                        </div>
+                                        <div>
+                                            <p class="date h6">${data.CommentHeader}</p>
+                                            <p class="comment">${data.CommentText}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                `);
+                    }
+                });
+            })
+        });
+    </script>
+}

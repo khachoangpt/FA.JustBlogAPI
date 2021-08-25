@@ -1,0 +1,22 @@
+﻿.item .post_s_item img {
+    width: 100%;
+}
+
+.thumb img{
+    width: 50px;
+}
+
+.sidebar {
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
