@@ -118,9 +118,11 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CategoriesManagementController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\PostsManagementController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,6 +158,10 @@
     <ProjectReference Include="..\FA.JustBlogAPI.Services\FA.JustBlogAPI.Services.csproj">
       <Project>{5e660461-4cc4-4406-a132-908eb207a96e}</Project>
       <Name>FA.JustBlogAPI.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FA.JustBlogAPI.WebMVC\FA.JustBlogAPI.WebMVC.csproj">
+      <Project>{3363F473-4B65-4B43-B8AB-91B3A1EADBAC}</Project>
+      <Name>FA.JustBlogAPI.WebMVC</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Just Blog</title>
+    <link rel="icon" href="~/assets/images/bootstrap-solid.svg" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="~/Assets/css/style.css" />
+    @Styles.Render("~/Assets/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Assets/css/global.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="nav-side-menu sidebar vh-100" id="mySidebar">
+                <div class="brand">
+                    <a class="navbar-brand text-white" href="~/">
+                        <img src="~/assets/images/bootstrap-solid.svg" width="40" height="40" class="d-inline-block" alt="">
+                        Just Blog
+                    </a>
+                </div>
+                <div class="menu-list pt-2">
+                    <ul id="menu-content" class="menu-content flex-column nav ml-2 mr-2">
+                        <li class="mb-3 h6">
+                            @Html.ActionLink("Post Management", "Index", "PostsManagement", new { area = "Admin" }, new { @class = "nav-link text-white hover" })
+                        </li>
+                        <li class="mb-3 h6">
+                            @Html.ActionLink("Category Management", "Index", "CategoriesManagement", new { area = "Admin" }, new { @class = "nav-link text-white" })
+                        </li>
+                        <li class="mb-3 h6">
+                            @Html.ActionLink("Tag Management", "Index", "TagsManagement", new { area = "Admin" }, new { @class = "nav-link text-white" })
+                        </li>
+                        <li class="mb-3 h6">
+                            @Html.ActionLink("Comment Management", "Index", "CommentsManagement", new { area = "Admin" }, new { @class = "nav-link text-white" })
+                        </li>
+                        <li class="mb-3 h6">
+                            @Html.ActionLink("Users Admin", "Index", "UsersAdmin", new { area = "Identity" }, new { @class = "nav-link text-white" })
+                        </li>
+                        <li class="mb-3 h6">
+                            @Html.ActionLink("Roles Admin", "Index", "RolesAdmin", new { area = "Identity" }, new { @class = "nav-link text-white" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="main" class="w-100">
+                <div id="openbtn">
+                    <a class="openbtn" onclick="openNav()"><i class="fas fa-bars fa-2x"></i></a>
+                </div>
+                <div id="closebtn" style="display: none;">
+                    <a class="closebtn" onclick="closeNav()"><i class="fas fa-bars fa-2x"></i></a>
+                </div>
+                @RenderBody()
+                <hr />
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Assets/js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="~/Assets/js/global.js"></script>
+</body>
+</html>

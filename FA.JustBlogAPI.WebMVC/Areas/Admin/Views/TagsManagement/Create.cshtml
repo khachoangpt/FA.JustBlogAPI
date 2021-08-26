@@ -1,0 +1,61 @@
+﻿@model TagViewModel
+
+@{
+    ViewBag.Title = "Create Tag";
+}
+
+<h2 class="text-center mt-4 mb-5">Create Tag</h2>
+<h3 class="text-success time-hide">@TempData["Message"]</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                <div>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @id = "Title", @oninput = "convertToSlug()" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.UrlSlug, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                <div>
+                    @Html.EditorFor(model => model.UrlSlug, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                    @Html.ValidationMessageFor(model => model.UrlSlug, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                <div>
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Count, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                <div>
+                    @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-secondary mr-3" })
+            <button type="submit" class="btn btn-info">
+                Create
+            </button>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
