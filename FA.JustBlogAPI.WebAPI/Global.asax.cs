@@ -9,12 +9,6 @@ namespace FA.JustBlogAPI.WebAPI
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter
-                .SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-
-            GlobalConfiguration.Configuration.Formatters
-                .Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
         }
     }
 }

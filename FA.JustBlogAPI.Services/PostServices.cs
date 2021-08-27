@@ -58,9 +58,6 @@ namespace FA.JustBlogAPI.Services
         {
             return await _unitOfWork.PostRepository
                 .GetQuery()
-                .Include(p => p.Category)
-                .Include(p => p.Tags)
-                .Include(p => p.Comments)
                 .OrderByDescending(x => x.ViewCount)
                 .Take(size)
                 .ToListAsync();
@@ -70,9 +67,6 @@ namespace FA.JustBlogAPI.Services
         {
             return await _unitOfWork.PostRepository
                 .GetQuery()
-                .Include(p => p.Category)
-                .Include(p => p.Tags)
-                .Include(p => p.Comments)
                 .Where(x => x.Category.Name.Equals(category))
                 .ToListAsync();
         }
@@ -81,9 +75,6 @@ namespace FA.JustBlogAPI.Services
         {
             return await _unitOfWork.PostRepository
                 .GetQuery()
-                .Include(p => p.Category)
-                .Include(p => p.Tags)
-                .Include(p => p.Comments)
                 .Where(x => x.CategoryId == categoryId)
                 .ToListAsync();
         }
@@ -98,9 +89,6 @@ namespace FA.JustBlogAPI.Services
         {
             return await _unitOfWork.PostRepository
                 .GetQuery()
-                .Include(p => p.Category)
-                .Include(p => p.Tags)
-                .Include(p => p.Comments)
                 .Where(x => x.Tags
                 .Any(t => t.Name.Equals(tag)))
                 .ToListAsync();
@@ -110,9 +98,6 @@ namespace FA.JustBlogAPI.Services
         {
             return await _unitOfWork.PostRepository
                 .GetQuery()
-                .Include(p => p.Category)
-                .Include(p => p.Tags)
-                .Include(p => p.Comments)
                 .Where(x => x.Tags
                 .Any(t => t.Id == tagId))
                 .ToListAsync();
@@ -122,9 +107,6 @@ namespace FA.JustBlogAPI.Services
         {
             return await _unitOfWork.PostRepository
                 .GetQuery()
-                .Include(p => p.Category)
-                .Include(p => p.Tags)
-                .Include(p => p.Comments)
                 .Where(x => x.Published == published)
                 .ToListAsync();
         }
@@ -133,9 +115,6 @@ namespace FA.JustBlogAPI.Services
         {
             return await _unitOfWork.PostRepository
                 .GetQuery()
-                .Include(p => p.Category)
-                .Include(p => p.Tags)
-                .Include(p => p.Comments)
                 .Where(x => x.PostedOn.Year == year && x.PostedOn.Month == month && x.UrlSlug.Equals(urlSlug))
                 .FirstOrDefaultAsync();
         }
@@ -144,9 +123,6 @@ namespace FA.JustBlogAPI.Services
         {
             return _unitOfWork.PostRepository
                 .GetQuery()
-                .Include(p => p.Category)
-                .Include(p => p.Tags)
-                .Include(p => p.Comments)
                 .OrderByDescending(x => x.ViewCount)
                 .Take(size)
                 .ToList();
@@ -161,10 +137,6 @@ namespace FA.JustBlogAPI.Services
             {
                 query = orderBy(query);
             }
-
-            query = query.Include(q => q.Category);
-            query = query.Include(q => q.Tags);
-            query = query.Include(q => q.Comments);
 
             return await Paginated<Post>.CreateAsync(query.AsNoTracking(), pageIndex, pageSize);
         }

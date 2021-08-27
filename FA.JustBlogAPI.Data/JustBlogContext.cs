@@ -1,15 +1,13 @@
 ﻿using FA.JustBlog.Data;
 using FA.JustBlogAPI.Models.BaseEntities;
 using FA.JustBlogAPI.Models.Common;
-using FA.JustBlogAPI.Models.Security;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace FA.JustBlogAPI.Data
 {
-    public class JustBlogContext : IdentityDbContext<User>
+    public class JustBlogContext : DbContext
     {
         public JustBlogContext() : base("JustBlogConn")
         {
