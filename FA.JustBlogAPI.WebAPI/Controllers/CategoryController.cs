@@ -45,14 +45,14 @@ namespace FA.JustBlogAPI.WebAPI.Controllers
 
         [HttpPut]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCategory(Guid id, CategoryViewModel categoryViewModel)
+        public async Task<IHttpActionResult> PutCategory(CategoryViewModel categoryViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var category = await _categoryServices.GetByIdAsync(id);
+            var category = await _categoryServices.GetByIdAsync(categoryViewModel.Id);
             if (category == null)
             {
                 return BadRequest();
